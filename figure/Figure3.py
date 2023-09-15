@@ -135,8 +135,8 @@ if __name__=="__main__":
             mat_motion_under_m = dis_m
             mat_motion_under_c = dis_c
 
-    print(f't test: {stats.ttest_rel(mat_motion_under_m, mat_color_under_m,alternative="less")}')
-    print(f't test: {stats.ttest_rel(mat_color_under_c, mat_motion_under_c,alternative="less")}')
+    print(f't test: {stats.ttest_rel(mat_motion_under_m, mat_color_under_m)}')
+    print(f't test: {stats.ttest_rel(mat_color_under_c, mat_motion_under_c)}')
 
     labels = [r'$D_{m}(i,j)^{c}$',r'$D_{c}(i,j)^c$',r'$D_{m}(i,j)^m$',r'$D_{c}(i,j)^m$']
     plt.legend(labels, bbox_to_anchor=(1, 0.5),fontsize=20)
