@@ -55,10 +55,6 @@ for task in ['Motion','Color']:
         print(f'{roi},{task},pvalue{pp[idx]},att{at_value}')
     x = np.arange(len(att))
     width = 0.3
-    if task =='Motion':
-        att[0] = 0.92
-        att[1] = 0.93
-        att[2] = 0.9
     plt.bar(x-width/2 + width*['Motion', 'Color'].index(task), att, width,color=bar_colors[['Motion', 'Color'].index(task)])
 
 plt.ylim(0,1.2)

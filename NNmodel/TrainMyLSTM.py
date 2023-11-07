@@ -77,7 +77,7 @@ def train(train_data_loader, eval_data_loader, model, criterion, optimizer, num_
         start_epoch = checkpoint['epoch']
         start_step = checkpoint['step']
 
-    model.cuda() # 模型拷贝
+    model.cuda() # model copy
 
     for epoch_index in range(start_epoch, num_epoch):
         num_batches = len(train_data_loader)

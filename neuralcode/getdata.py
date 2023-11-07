@@ -67,7 +67,7 @@ def compute_dists(spikes, labels, isolated_neurons, ref_dists, other_args, condi
             'x1', 'y1', 'x2', 'y2', 'isi_full', 'spike_full', 'sync_full']
             t0 = time_before_stim
             t1 = t0 + bin_size #initialize t0 & t1 on first step
-            while t1 <= time_after_stim: #time_after_stim is normally 0.2 since all info is in that period
+            while t1 <= time_after_stim: 
                 dists_full_intrvl.append(scalar_dists(tmp_neuron, inds, t0, t1))
                 labels_full_intrvl.append(['isi_full_' + str(t1)[0:4], 'spike_full_' + str(t1)[0:4], 'sync_full_' + str(t1)[0:4]])
                 t0 += step_size
@@ -143,8 +143,8 @@ ref_dists = pd.read_csv(parent_save_dir + '/reference_dists.csv', sep=',')
 
 focus_on_time = 0
 bin_size = 0.05
-time_after_stim = 0.2 + bin_size # did 200ms
-time_before_stim = 0.0 - bin_size*2
+time_after_stim = 0.2 + bin_size 
+time_before_stim = 0.0 
 step_size = 0.01
 edges = [-1.5,3.5]
 on_fixation_cross = -1.5

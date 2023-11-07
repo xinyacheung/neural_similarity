@@ -216,7 +216,7 @@ if output_size == 1000:
 for frames in [12, 24, 36, 48, 60, 120, 240]: # default:60
   Nimgs=3*frames
 
-  for index in range(21):#(11, 21):
+  for index in range(21):
     col_choice = comb[index][0]
     dir_choice = comb[index][1]
     print('Combination No. :', index, 'Combination :', comb[index], 'Colour :', col_choice, 'Direction : ', dir_choice)

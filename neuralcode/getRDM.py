@@ -87,6 +87,8 @@ data_mot=data_mat[np.where(data_mat[:,5]=='motion'),:]
 data_mot=np.squeeze(data_mot,0)
 print(data_mot.shape)
 
+
+# color-relevant
 matrix=data_col # data_mot
 n,m=matrix.shape
 x1=matrix[:,9]
@@ -112,37 +114,3 @@ for i in range(n):
 
 EDcolour=EDcolour/counts
 torch.save(EDcolour,save_dir+'Color_ISI.pt')
-
-
-# get RDM based on Pearson or Cosine etc. distance measure at each time bin
-mat_files_match = data_dir + '/*.mat'
-data_files = glob.glob(mat_files_match)
-data_files.sort()
-sess=[]
-for file_name_i in data_files:
-    try:
-        sess_num = re.search(r'(/)([0-9]*)(.mat)', file_name_i).group(2)
-    except:
-        sess_num = re.search(r'(/)([0-9]*_[0-9]*)(.mat)', file_name_i).group(2)
-    sess.append(sess_num)
-    
-upper_time2 = [0.0,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.1,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.2,0.21]
-
-measure = 'Pearson'
-for task in ['color', 'motion']:
-    for type in ['lobe','roi']:
-        for t1 in upper_time2:
-            if type =='lobe':
-                temp = np.zeros((16,3))
-                for session in sess:
-                    temp = (temp+np.load(save_dir+f'/{task}_{session}_{t1}_lobe.npy'))/2.0
-            if type == 'roi':
-                temp = np.zeros((16,6))
-                for session in sess:
-                    temp = (temp+np.load(save_dir+f'/{task}_{session}_{t1}_roi.npy'))/2.0
-
-            matrix = torch.zeros(16,16)
-            for i in range(16):
-                for j in range(16):
-                    matrix[i,j] = stats.pearsonr(temp[i], temp[j])[0] # other measures etc.
-            torch.save(matrix, save_dir + f'/{measure}({type}_{t1}).pt')

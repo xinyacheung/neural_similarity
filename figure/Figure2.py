@@ -34,7 +34,7 @@ for baseline in ['distance']:
     for task in ['motion','color']:
 
         plt.figure(figsize=(10,4))
-        for method in ['ISI','SPIKE','Euclidean(lobe)','Cosine(lobe)','Pearson(lobe)','Euclidean(roi)','Cosine(roi)','Pearson(roi)']:
+        for method in ['ISI','SPIKE','Euclidean','Cosine','Pearson']:
             if method in ['ISI','SPIKE']:
 
                 correlation = []
@@ -48,35 +48,24 @@ for baseline in ['distance']:
 
                 correlation = []
                 for time in upper_time2:
-                    if method == 'Euclidean(lobe)':
-                        ED = torch.load(parent_save_dir+f'/Euclidean(lobe).pt')
+                    if method == 'Euclidean':
+                        ED = torch.load(parent_save_dir+f'/Euclidean.pt')
                         correlation.append(compare(ED, baseline_matrix))
-                    if method == 'Cosine(lobe)':
-                        ED = -1*torch.load(parent_save_dir+f'/Cosine(lobe).pt')
+                    if method == 'Cosine':
+                        ED = -1*torch.load(parent_save_dir+f'/Cosine.pt')
                         correlation.append(compare(ED, baseline_matrix))
-                    if method == 'Pearson(lobe)':
-                        ED = -1*torch.load(parent_save_dir+f'/Pearson(lobe).pt')
-                        correlation.append(compare(ED, baseline_matrix))
-                    if method == 'Euclidean(roi)':
-                        ED = torch.load(parent_save_dir+f'/Euclidean(roi).pt')
-                        correlation.append(compare(ED, baseline_matrix))
-                    if method == 'Cosine(roi)':
-                        ED = -1*torch.load(parent_save_dir+f'/Cosine(roi).pt')
-                        correlation.append(compare(ED, baseline_matrix))
-                    if method == 'Pearson(roi)':
-                        ED = -1*torch.load(parent_save_dir+f'/Pearson(roi).pt')
+                    if method == 'Pearson':
+                        ED = -1*torch.load(parent_save_dir+f'/Pearson.pt')
                         correlation.append(compare(ED, baseline_matrix))
                 plt.plot([i for i in upper_time], correlation, '-')
 
         if task =='motion':
-            plt.legend( ['ISI distance','SPIKE distance','Euclidean(lobe)','Cosine(lobe)','Pearson(lobe)','Euclidean(roi)','Cosine(roi)','Pearson(roi)'], bbox_to_anchor=(1.02, 0), loc=3, borderaxespad=0,fontsize=18)
+            plt.legend( ['ISI distance','SPIKE distance','Euclidean','Cosine','Pearson'], bbox_to_anchor=(1.02, 0), loc=3, borderaxespad=0,fontsize=18)
 
         plt.xlabel('Time (second)',fontsize=20)
         plt.ylabel('Spearman correlation',fontsize=20)
         plt.xticks(fontsize=20)
-        plt.yticks([-0.3,0,0.3,0.6],fontsize=20)
-        plt.fill_between([0,0.05],-0.4,0.7,facecolor = 'b', alpha = 0.1)
-        plt.fill_between([0.15, 0.21], -0.4, 0.7, facecolor='y', alpha=0.2)
+        plt.yticks(fontsize=20)
         plt.tight_layout()
         plt.show()
 

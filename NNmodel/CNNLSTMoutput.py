@@ -23,7 +23,7 @@ class LSTM(nn.Module):
             nn.Linear(256,num_classes)
         )
 
-    def forward(self, x): # x.shape=[240,270,400]  [bs, seq_len, hidden_size]
+    def forward(self, x): # [bs, seq_len, hidden_size]
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).cuda()
         c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).cuda()
         output, (hidden, cell) = self.lstm(x, (h0, c0))

@@ -2,7 +2,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from torch.utils.data import Dataset
-import torchvision.transforms.functional as TF
 from PIL import Image
 
 class LSTMDataset(Dataset):

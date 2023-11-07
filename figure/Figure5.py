@@ -63,7 +63,7 @@ for baseline in ['distance']:
                     H[['PFC', 'FEF', 'LIP', 'IT', 'MT', 'V4'].index(roi), layer - 1] = compare(test_matrix,
                                                                                                baseline_matrix)
             CM = H.numpy()
-            cmap = plt.get_cmap('Purples')#('Greys')
+            cmap = plt.get_cmap('Purples')
             norm = matplotlib.colors.Normalize(vmin=-0.2,vmax=0.6)
             if task=='motion':
                 plt.subplot(211)
