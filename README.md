@@ -1,5 +1,6 @@
 # neural_similarity
-code for paper 'Adaptive stretching of representations across brain regions and deep learning model layers'
+code for paper \url{https://www.biorxiv.org/content/10.1101/2023.12.01.569615v1} 'Adaptive stretching of representations across brain regions and deep learning model layers'
+Xin-Ya Zhang, Sebastian Bobadilla-Suarez, Xiaoliang Luo, Marilena Lemonari, Scott L. Brincat, Markus Siegel, Earl K. Miller, Bradley C. Love. bioRxiv.
 
 *data: cue images and electrode monkey spike data sample from [1];
 
