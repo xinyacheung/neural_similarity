@@ -2,7 +2,7 @@
 # [Adaptive stretching of representations across brain regions and deep learning model layers](https://www.biorxiv.org/content/10.1101/2023.12.01.569615v1)
 Xin-Ya Zhang, Sebastian Bobadilla-Suarez, Xiaoliang Luo, Marilena Lemonari, Scott L. Brincat, Markus Siegel, Earl K. Miller, Bradley C. Love. bioRxiv.
 
-#### This code repository includes following documents
+#### This code repository includes the following documents
 demo: Example codes for plotting the data figures in the main text;
 
 data: cue images and electrode monkey spike data sample from [1];
