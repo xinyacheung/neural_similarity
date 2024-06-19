@@ -1,0 +1,67 @@
+Summary of the process for calculating neural dissimilarity and constructing Representational Dissimilarity Matrices (RDMs) using the scripts getdata.py and getRDM.py:
+
+*getdata.py: Calculating Neural Dissimilarity
+'''
+This script calculates neural dissimilarity using Inter-Spike Interval (ISI) and SPIKE distances from spiking recordings. The data is sourced from the study by Siegel, M., Buschman, T. J., & Miller, E. K. (2015).
+
+Key Steps:
+1. Load Data:
+   - Load spiking data and associated session, trial, and recording site information.
+2. Preprocess Data:
+   - Exclude bad (i.e., empty) trials.
+   - Focus on specific tasks: motion and color.
+3. Compute Neural Dissimilarities:
+   - Calculate ISI distance, SPIKE distance, and SPIKE synchronization over specified time intervals.
+4. Save Results:
+   - Save the computed distances for each session into CSV files.
+
+Key Functions:
+- `blockPrint` and `enablePrint`: Utility functions to suppress and restore print outputs, respectively.
+- `scalar_dists`: Calculates ISI distance, SPIKE distance, and SPIKE synchronization for a given set of spike trains over a specified time interval.
+- `compute_dists`: Iterates over neurons and trials to compute the distances for both 'motion' and 'color' conditions, and structures the results into a DataFrame.
+- `main`: Orchestrates the loading of data, preprocessing, and calls to `compute_dists` for each session, handling both 'motion' and 'color' conditions.
+
+The script is parallelized using the `joblib` library to speed up computations across multiple sessions.
+
+Parameters and Constants:
+- `parent_save_dir`: Directory containing input data files and where results will be saved.
+- `data_dir`: Directory containing the raw .mat files with spiking data.
+- `bin_size`, `time_before_stim`, `time_after_stim`, `step_size`: Parameters defining the time intervals for dissimilarity computations.
+- `edges`: The time edges for the spike trains.
+- `njobs`: Number of parallel jobs to run.
+'''
+
+
+
+*getRDM.py: Constructing Representational Dissimilarity Matrices (RDMs)
+'''
+This script calculates Representational Dissimilarity Matrices (RDM) using measure-based distances (ISI & SPIKE distances) from spiking recordings.
+
+Key Steps:
+1. Load and Preprocess Data
+2. Compute RDMs:
+   - Calculate Representational Dissimilarity Matrices (RDMs) based on ISI and SPIKE methods.
+   - RDMs are computed separately for 'motion' and 'color' tasks across different time bins.
+
+# 3. Save Results:
+#    - Save the computed RDMs into .pt files using PyTorch for future analysis and visualization.
+
+Main Processing:
+- Loop through tasks ('motion' and 'color').
+  - Filter data for the current task.
+  - Loop through distance methods ('ISI' and 'SPIKE').
+    - Loop through each time point in `upper_time`.
+      - Extract coordinates and distances for the current method and time point.
+      - Initialize an empty tensor `ED` to store the distances and `counts` to store the count of observations for each coordinate pair.
+      - Populate the `ED` tensor by accumulating distances and updating counts for each coordinate pair.
+      - Normalize the `ED` tensor by the counts and save it as a .pt file.
+
+Parameters and Constants:
+- `parent_save_dir`: Directory containing input data files and where results will be saved.
+- `data_dir`: Directory containing the raw CSV files with spiking data.
+- `mat_files_match`: Pattern to match the relevant CSV files.
+- `upper_time`: List of time points for computing distances.
+- `points`: Dictionary mapping coordinate pairs to matrix indices.
+- `tasks`: List of tasks ('motion' and 'color') for which distances are computed.
+- `methods`: List of distance methods ('ISI' and 'SPIKE').
+'''

@@ -294,7 +294,7 @@ for frames in [12, 24, 36, 48, 60, 120, 240]:
     print(index)
     print(inputs.shape)
     print(OUTcomb.shape) 
-    print(f'frames:{frames}/{running}')
+    print(f'frames:{frames}')
     torch.save(inputs, f'LSTMData/LSTMTestX_{index}_{output_size}_{frames}')
     torch.save(OUTcomb, f'LSTMData/LSTMTestY_{index}_{output_size}_{frames}')
     print("--- %s minutes ---" % ((time.time() - start_time) / 60))

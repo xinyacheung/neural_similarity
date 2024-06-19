@@ -198,6 +198,7 @@ if __name__ == "__main__":
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
+    # Train model
     train(train_data_loader=train_data_loader, eval_data_loader=eval_data_loader,
             model=model, criterion=criterion, optimizer=optimizer,
             num_epoch=num_epochs,input_size=input_size,

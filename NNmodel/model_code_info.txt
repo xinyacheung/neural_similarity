@@ -1,0 +1,101 @@
+In this context, the scripts *MovieCNNoutput.py, *TrainMyLSTM.py, and *CNNLSTMoutput.py present a framework for generating visual stimuli, training LSTM models, and constructing representational dissimilarity matrices (RDMs).
+
+
+*MovieCNNoutput.py: Generation of visual stimuli and the extraction of activations from a pretrained VGG-16 model
+'''
+The script begins by loading fixation point and cue images, converting them into tensors for processing. Key parameters such as possible directions, colors, and cue symbols are defined to generate randomized dot patterns. These patterns are used to create stimulus images varying in direction and color combinations. The pretrained VGG-16 model is then employed to process these stimuli, extracting intermediate layer activations (e.g., the last layer size of 1000) which are saved for subsequent LSTM training and testing.
+
+Key Steps:
+1. Load Images:
+   - Load fixation point and cue images.
+   - Convert images to tensors for processing.
+
+2. Define Parameters:
+   - Possible directions and colors.
+   - Mapping colors to specific color codes.
+   - Function to generate random dot coordinates with specific speed and direction.
+   - Function to generate images with random dots of specified direction and color.
+   - Function to determine the response label based on the cue, direction, and color.
+
+4. Visual Stimuli Generation:
+   - Function `testX` to generate a sequence of frames for the stimuli, including the fixation point, cue, and stimulus images.
+   - Generate stimuli for different combinations of direction and color.
+
+5. Model Setup:
+   - Load pretrained VGG-16 model.
+   - Define layers for which intermediate activations will be extracted, we used the last layer.
+
+6. Generate and Save Activations:
+   - For different frame counts, speeds, cues, and direction-color combinations:
+     - Generate stimuli images and determine the correct response.
+     - Process images through the pretained VGG-16 model and extract activations.
+     - Save the extracted activations and labels for both training and testing datasets.
+
+Parameters and Constants:
+- `parent_save_dir`: Directory containing input image files.
+- `Npoints`: Number of random dots per image.
+- `frames`: Number of frames in each stimulus sequence.
+- `comb`: List of possible direction-color combinations.
+- `cl`: Dictionary mapping color choices to color codes.
+- `cuelist`: List of possible cues (cross, quatrefoil, circle, triangle).
+- `N`: Number of samples per combination for training and testing.
+- `output_size`: Size of the output layer of the pretrained VGG-16 model.
+'''
+
+
+*TrainMyLSTM.py: The training and evaluation of an LSTM model using PyTorch
+'''
+This script starts by loading pre-processed datasets containing sequences of visual stimuli representations, which were generated and saved by MovieCNNoutput.py. The LSTM model is defined with parameters including input size, hidden size, and number of layers. The script initializes the model, sets up training parameters such as learning rate and batch size, and defines the loss function and optimizer. Through iterative loading of training data using PyTorch DataLoader, the LSTM model is trained to minimize the loss, optimizing its ability to classify visual stimuli based on the extracted representations.
+
+Key Steps:
+1. Dataset Loading:
+   - The script loads pre-processed training and evaluation datasets stored as PyTorch tensors.
+   - Training dataset consists of sequences of visual stimuli representations.
+   - Evaluation dataset is used to validate the trained model's performance.
+
+2. Model Definition (LSTM):
+
+3. Training Process:
+   - The script initializes the LSTM model, sets up training parameters (like learning rate and batch size), and defines the loss function and optimizer.
+   - Training data is iteratively loaded using DataLoader, batches are processed, and gradients are updated to minimize the loss.
+
+Note: Ensure that the 'MyDataset.py' file contains the implementation of the LSTMDataset class, which should handle loading data, preprocessing, and batching for the LSTM model.
+'''
+
+*CNNLSTMoutput.py: Constructing Representational Dissimilarity Matrices (RDMs)
+'''
+This script begins by loading a well-trained LSTM model and test datasets containing sequences of stimuli and corresponding labels. It computes activations of intermediate layers for each test batch, categorizing them based on motion and color conditions. The activations are then used to compute Euclidean distance matrices for motion and color conditions, resulting in RDMs that quantify neural representation similarities or dissimilarities. These matrices are saved as .pt files for further analysis and interpretation.
+
+Key steps:
+
+1. Loading Well-trained Model
+
+2. Test Data Loading:
+    - Loads test data (sequences of stimuli and corresponding labels) from files.
+
+3. Activation Calculation:
+    - Computes activations of intermediate layers of the LSTM model for each test batch.
+    - Stores activations and categorizes them based on motion and color conditions.
+
+4. Activation Calculation:
+    - Computes activations for motion and color conditions.
+
+5. Distance Matrix Calculation:
+    - Computes Euclidean distance matrices for motion and color conditions using average activations.
+    - Saves the distance matrices as .pt files for further analysis.
+
+Parameters and Constants:
+- input_size: Size of the input to the LSTM model.
+- hidden_size: Number of units in the hidden state of the LSTM.
+- num_layers: Number of LSTM layers in the model.
+- num_classes: Number of output classes for classification.
+- output_size: Size of the output vector from the LSTM model.
+- seq_len: Length of the sequence used for testing, after truncation.
+- Npoints: Number of points (dots) generated in the stimuli images.
+- Nimgs: Number of images generated per sequence of stimuli.
+- frames: Number of frames used in generating stimuli images.
+- N: Number of repetitions per condition (speed and cue combination).
+- out_layer: Name of the layer from which activations are extracted.
+- parent_save_dir: Parent directory path where images (fixpoint.jpg, cross.jpg, quatrefoil.jpg, circle.jpg, triangle.jpg) are saved.
+- return_layers: Dictionary mapping layer names to keys used for extracting activations.
+'''
