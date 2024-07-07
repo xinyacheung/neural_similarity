@@ -9,11 +9,11 @@ data: cue images and electrode monkey spike data sample from [1];
 > 
 script: neural data and model data processing, including:
 
-neuralcode: process neuronal data from monkey spike data and get representational dissimilarity matrix (RDM);
+*neuralcode: process neuronal data from monkey spike data and get representational dissimilarity matrix (RDM);
 
-NNmodel: the CNN-LSTM model example was fed the same movies as that presented to monkeys in the monkey experiments and closely replicated their training procedure;
+*NNmodel: the CNN-LSTM model example was fed the same movies as that presented to monkeys in the monkey experiments and closely replicated their training procedure;
 
-demo: Example codes for plotting the data figures in the main text.
+*demo: Example codes for plotting the data figures in the main text.
 
 
 #### Software Dependencies
