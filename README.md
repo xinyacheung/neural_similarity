@@ -3,15 +3,18 @@
 Xin-Ya Zhang, Sebastian Bobadilla-Suarez, Xiaoliang Luo, Marilena Lemonari, Scott L. Brincat, Markus Siegel, Earl K. Miller, Bradley C. Love. bioRxiv.
 
 #### This code repository includes the following documents
-demo: Example codes for plotting the data figures in the main text;
 
 data: cue images and electrode monkey spike data sample from [1];
 > [1] Siegel, M., Buschman, T. J. & Miller, E. K. Cortical information flow during flexible sensorimotor decisions. Science 348, 1352–1355 (2015).
 > 
+script: neural data and model data processing, including:
+
 neuralcode: process neuronal data from monkey spike data and get representational dissimilarity matrix (RDM);
 
-NNmodel: the CNN-LSTM model example was fed the same movies as that presented to monkeys in the monkey experiments
-and closely replicated their training procedure.
+NNmodel: the CNN-LSTM model example was fed the same movies as that presented to monkeys in the monkey experiments and closely replicated their training procedure;
+
+demo: Example codes for plotting the data figures in the main text.
+
 
 #### Software Dependencies
 
