@@ -1,6 +1,6 @@
 
-# [Adaptive stretching of representations across brain regions and deep learning model layers](https://www.biorxiv.org/content/10.1101/2023.12.01.569615v1)
-Xin-Ya Zhang, Sebastian Bobadilla-Suarez, Xiaoliang Luo, Marilena Lemonari, Scott L. Brincat, Markus Siegel, Earl K. Miller, Bradley C. Love. bioRxiv.
+# [Adaptive stretching of representations across brain regions and deep learning model layers](https://www.nature.com/articles/s41467-025-65231-y)
+Xin-Ya Zhang, Sebastian Bobadilla-Suarez, Xiaoliang Luo, Marilena Lemonari, Scott L. Brincat, Markus Siegel, Earl K. Miller, Bradley C. Love. Nature Communications, 2025.
 
 #### This code repository includes the following documents
 
